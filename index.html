@@ -2,15 +2,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>For [Her Name] ❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
+
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ffd6e0, #ffeaf4);
+  background: linear-gradient(135deg, #ffd6e8, #ffeef6);
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 section {
@@ -20,12 +25,13 @@ section {
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 40px;
+  padding: 30px;
+  position: relative;
 }
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 button {
@@ -33,28 +39,51 @@ button {
   font-size: 18px;
   border: none;
   border-radius: 30px;
-  background-color: #ff4f81;
-  color: white;
   cursor: pointer;
   transition: 0.3s;
+  margin: 10px;
+}
+
+.primary {
+  background-color: #ff4f81;
+  color: white;
+}
+
+.secondary {
+  background-color: #ffffff;
+  color: #ff4f81;
+  position: absolute;
 }
 
 button:hover {
   transform: scale(1.1);
 }
 
-.timeline {
-  opacity: 0;
-  transition: 1s;
+.hidden {
+  display: none;
 }
 
-.show {
-  opacity: 1;
+#timeline {
+  opacity: 0;
+  transition: opacity 1s ease;
 }
 
 .memory {
-  margin: 60px 0;
   max-width: 600px;
+  margin: 80px 0;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease;
+}
+
+.memory.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.final {
+  font-size: 2rem;
+  margin-top: 60px;
 }
 
 </style>
@@ -62,43 +91,94 @@ button:hover {
 
 <body>
 
-<section id="landing">
+<!-- Landing 1 -->
+<section id="landing1">
   <h1>Only one person can unlock this website...</h1>
-  <button onclick="unlock()">Click if you're [Her Name] 💗</button>
+  <button class="primary" onclick="goToSecond()">Click if you're Vegeta💗</button>
 </section>
 
-<section id="timeline" class="timeline">
+<!-- Landing 2 -->
+<section id="landing2" class="hidden">
+  <h1>Are you my cutiepie? 😌</h1>
+  <button class="primary" onclick="accept()">YES 💗</button>
+  <button class="secondary" id="noBtn">NO 🙈</button>
+</section>
+
+<!-- Timeline -->
+<section id="timeline">
   <h1>Our Story</h1>
 
   <div class="memory">
     <h2>How We Met</h2>
-    <p>Write your story here...</p>
+    <p>Write your story here.</p>
   </div>
 
   <div class="memory">
-    <h2>Our First Memory</h2>
-    <p>Write something personal here...</p>
+    <h2>First Memory</h2>
+    <p>Write something personal here.</p>
   </div>
 
   <div class="memory">
     <h2>Our Inside Joke</h2>
-    <p>Something only she understands...</p>
+    <p>Something only she understands.</p>
   </div>
 
   <div class="memory">
     <h2>The Future</h2>
-    <p>Where we're going together...</p>
+    <p>Where we’re going together.</p>
   </div>
 
-  <h1>Happy Valentine's Day ❤️</h1>
+  <div class="final">
+    Happy Valentine’s Day ❤️
+  </div>
+
 </section>
 
 <script>
-function unlock() {
-  document.getElementById("landing").style.display = "none";
-  document.getElementById("timeline").classList.add("show");
-  window.scrollTo(0, 0);
+
+function goToSecond() {
+  document.getElementById("landing1").classList.add("hidden");
+  document.getElementById("landing2").classList.remove("hidden");
 }
+
+function accept() {
+  document.getElementById("landing2").classList.add("hidden");
+  document.getElementById("timeline").style.opacity = "1";
+
+  confetti({
+    particleCount: 200,
+    spread: 100,
+    origin: { y: 0.6 }
+  });
+}
+
+// Dancing NO button
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  noBtn.style.transform = "rotate(" + (Math.random()*40 - 20) + "deg)";
+});
+
+// Scroll reveal
+const memories = document.querySelectorAll('.memory');
+
+window.addEventListener('scroll', () => {
+  const triggerBottom = window.innerHeight * 0.85;
+
+  memories.forEach(memory => {
+    const memoryTop = memory.getBoundingClientRect().top;
+
+    if (memoryTop < triggerBottom) {
+      memory.classList.add('show');
+    }
+  });
+});
+
 </script>
 
 </body>
