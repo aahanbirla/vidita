@@ -1,1 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For [Her Name] ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
 
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffd6e0, #ffeaf4);
+  overflow-x: hidden;
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 40px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  background-color: #ff4f81;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.timeline {
+  opacity: 0;
+  transition: 1s;
+}
+
+.show {
+  opacity: 1;
+}
+
+.memory {
+  margin: 60px 0;
+  max-width: 600px;
+}
+
+</style>
+</head>
+
+<body>
+
+<section id="landing">
+  <h1>Only one person can unlock this website...</h1>
+  <button onclick="unlock()">Click if you're [Her Name] 💗</button>
+</section>
+
+<section id="timeline" class="timeline">
+  <h1>Our Story</h1>
+
+  <div class="memory">
+    <h2>How We Met</h2>
+    <p>Write your story here...</p>
+  </div>
+
+  <div class="memory">
+    <h2>Our First Memory</h2>
+    <p>Write something personal here...</p>
+  </div>
+
+  <div class="memory">
+    <h2>Our Inside Joke</h2>
+    <p>Something only she understands...</p>
+  </div>
+
+  <div class="memory">
+    <h2>The Future</h2>
+    <p>Where we're going together...</p>
+  </div>
+
+  <h1>Happy Valentine's Day ❤️</h1>
+</section>
+
+<script>
+function unlock() {
+  document.getElementById("landing").style.display = "none";
+  document.getElementById("timeline").classList.add("show");
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
